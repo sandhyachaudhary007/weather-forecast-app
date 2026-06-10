@@ -139,13 +139,6 @@ else:
 
 if not city:
     st.stop()
-
-city2 = ""
-
-compare = st.checkbox(" Compare with another city")
-
-if compare:
-    city2 = st.text_input("Enter Second City")
     
 get_weather = st.button("Get Weather")
 
@@ -159,24 +152,6 @@ if get_weather and city:
 
         if city not in st.session_state.history:
             st.session_state.history.append(city)
-        
-        if compare and city2:
-            
-            data2 = get_current_weather(city2)
-            
-            if not data2 or "main" not in data2:
-                st.error(f"Could not fetch weather data for {city2}")
-
-            else:
-                st.markdown("###  City Comparison")
-                
-                col1, col2 = st.columns(2)
-                
-                with col1:
-                    st.metric(label=city, value=f"{data['main']['temp']} °C")
-
-                with col2:
-                    st.metric(label=city2, value=f"{data2['main']['temp']} °C")
 
         forecast_data = get_forecast(city)
         
